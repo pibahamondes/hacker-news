@@ -4,6 +4,7 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 
+const {genMessage} = require('./utils/message');
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 8080;
 var app = express();
@@ -12,6 +13,13 @@ var io = socketIO(server); // for events!
 
 io.on('connection',(socket) => {
   console.log('New user connected');
+
+  socket.emit('newMessage',
+  genMessage("Admin", "Welcome to the chat app!"));
+
+
+  socket.broadcast.emit('newMessage',
+  genMessage("Admin", "New user joined"));
 
   socket.on('disconnect', () => {
     console.log('User disconnected');
