@@ -12,11 +12,6 @@ socket.on('newMessage', function(message){
   console.log('newMessage', message);
 });
 
-socket.emit('createMessage', function(from, text){
-  from,
-  text
-});
-
 socket.on('newEmail', function(email){
   console.log('New email', email);
 });
